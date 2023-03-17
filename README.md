@@ -9,7 +9,7 @@
 
 ### Project Description
 
-In this project, we made an articulated robot arm which can be controlled through a few potentiometers. It is designed so that different toolheads can be easily swappped in and out, making use of magnets, meaning it can be used to pick up things, draw with a pencil, grab things with a magnet, or just about anything else. Other toolheads can be easily designed in the future, and be used for all kinds of applications. 
+In this project, we made an articulated robot arm which can be controlled through a few potentiometers. It is designed so that different toolheads can be easily swapped in and out, making use of magnets, meaning it can be used to pick up things, draw with a pencil, grab things with a magnet, or just about anything else. Other toolheads can be easily designed in the future, and be used for all kinds of applications. 
 
 ### Code and Wiring
 
