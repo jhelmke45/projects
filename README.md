@@ -91,6 +91,10 @@ _The seperate plate containing wiring and labelled potentiometer mounts._
 
 _The fully assembled and functional arm._
 
+https://user-images.githubusercontent.com/113116262/226353837-671ebcff-0872-4e96-8308-afa104fb123a.mov
+
+_A video demonstration of the arm's functionality._
+
 ### Reflection
 
 In the end, the project is fully functional, and actually moves very smoothly. It took a while to get the movement to be smooth, though, because the servos kept jittering back and forth. After a few different solutions, a lot of troubleshooting, and a complete transition from using CircuitPython and the Metro boards to using Arduino, we found a good solution. We simplified the code a bunch, and that combined with good use of the ```map()``` function resulted in just about zero jittering in all of the servos. 
