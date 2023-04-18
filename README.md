@@ -3,6 +3,7 @@
 ## Table of Contents
 * [Table of Contents](#TableOfContents)
 * [Robot Arm Project](#Robot_Arm_Project)
+* [PID Box](#PID_Box)
 ---
 
 ## Robot_Arm_Project
@@ -102,3 +103,13 @@ In the end, the project is fully functional, and actually moves very smoothly. I
 We didn't run into too many issues with CAD, though we did have to find a solution to our goal of being able to easily swap the toolheads. We ended up settling on using magnets, and implementing them was realitively straightforward. The main linkage of our arm is based off of [this design](https://grabcad.com/library/modular-electromagnetic-robot-arm-1), though we have either edited or replaced most of the parts to customize them for our needs, or to be more efficiently fabricated. This linkage provides a smooth control system for the arm with only two potentiometers, while allowing for a large range of motion and keeping the head level with the ground. 
 
 Overall, I think that this project was pretty successful. It moves well in 3 dimensions, can complete an assortment of tasks, and the head can be easily swapped. It would have been cool if the heads were automatically interchangeable and didn't require human interference, but the system we have is pretty seamless. 
+
+## PID_Box
+
+### Project Description
+
+### Code and Wiring
+
+### Evidence
+
+### Reflection
