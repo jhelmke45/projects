@@ -12,6 +12,18 @@
 
 In this project, we made an articulated robot arm which can be controlled through a few potentiometers. It is designed so that different toolheads can be easily swapped in and out, making use of magnets, meaning it can be used to pick up things, draw with a pencil, grab things with a magnet, or just about anything else. Other toolheads can be easily designed in the future, and be used for all kinds of applications. 
 
+Materials used:
+- 3 180° degree servos
+- 3 potentiometers
+- battery pack
+- 4 magnets for the head, and 4 more for each attachment
+- arduino uno
+- 8 standoffs
+- breadboard
+- wires
+- 4-40 bolts, nuts, and locknuts
+- lasercutter and 3D printer
+
 ### Code and Wiring
 
 ```python
