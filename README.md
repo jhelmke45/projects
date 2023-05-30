@@ -120,8 +120,100 @@ Overall, I think that this project was pretty successful. It moves well in 3 dim
 
 ### Project Description
 
+In this project, we tried to make a simple spinning wheel adjust its own speed towards a setpoint using PID.
+
 ### Code and Wiring
 
+```python
+import rotaryio
+import board
+import time
+import digitalio
+from analogio import AnalogOut
+import pwmio
+import simpleio
+from lcd.lcd import LCD
+from lcd.i2c_pcf8574_interface import I2CPCF8574Interface
+
+i2c = board.I2C()
+encoder = rotaryio.IncrementalEncoder(board.D3, board.D2)
+last_position = 0
+button = digitalio.DigitalInOut(board.D4)
+button.direction = digitalio.Direction.INPUT
+button.pull = digitalio.Pull.UP
+
+photoI = digitalio.DigitalInOut(board.D7)
+photoI.direction = digitalio.Direction.INPUT
+photoI.pull = digitalio.Pull.UP
+
+motor = pwmio.PWMOut(board.D8,duty_cycle = 65535,frequency=5000)
+
+prevState = True
+prevTime = 0
+
+lcd = LCD(I2CPCF8574Interface(i2c, 0x3f), num_rows=2, num_cols=16)
+
+maxSpeed = 100000   # constant, in rpm
+interval = 10   # number of rpms to change by
+trueSpeed = 0
+
+kp, ki, kd = 6, 0.01, 0   #CONSTANTS
+lastTime, Output, Setpoint, errSum, lastErr = 0, 0, 0, 0, 0
+motorPower = 0
+
+while True:
+    # rotary encoder code
+    position = encoder.position
+
+    if last_position is None or position != last_position:
+        print(position)
+
+        if(position > last_position and Setpoint < maxSpeed):
+            Setpoint = Setpoint + interval
+        if(position < last_position and Setpoint > 0):
+            Setpoint = Setpoint - interval
+
+        lcd.set_cursor_pos(0,0)
+        lcd.print(Setpoint)
+        
+    last_position = position
+
+    firstTime = time.monotonic()
+    intCount = 0
+    while time.monotonic() - firstTime <= .1:
+        if photoI.value != prevState:
+            intCount = intCount + 1
+            prevState = not prevState
+    trueSpeed = 6000 * (intCount / 12)
+
+    # PID math
+    now = time.monotonic()
+    timeChange = now - lastTime
+    error = Setpoint - trueSpeed
+    errSum = errSum + (error - timeChange)
+    dErr = (error - lastErr) / timeChange
+    Output = kp * error + ki * errSum + kd * dErr
+    lastErr = error
+    lastTime = now
+
+    motorPower = simpleio.map_range(Output, 0, maxSpeed, 0, 65535)
+    print(f"Motor Power: {motorPower}")
+    motor.value = motorPower
+
+    # LCD output code
+    lcd.set_cursor_pos(0,0)
+    lcd.print(f"Setpoint: {Setpoint}rpm")
+    lcd.set_cursor_pos(0,1)
+    lcd.print(f"Speed: {trueSpeed}rpm")
+```
+
+![image](https://github.com/jhelmke45/projects/assets/113116262/bb2fa0b8-52b0-482e-bef2-db6ec160f178)
+_Wiring diagram_
+
 ### Evidence
+
+![image](https://github.com/jhelmke45/projects/assets/113116262/bb1f8f0d-5e8e-4dea-b077-9fb3ce952a4d)![image](https://github.com/jhelmke45/projects/assets/113116262/180ad6be-af71-4ff6-ad34-25a8d53ccf93)
+
+_CAD renderings of the base plates, and then of the full assembly, complete with imported parts_
 
 ### Reflection
